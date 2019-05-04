@@ -12,10 +12,13 @@ class ColorDetector:
                     if(green>red):
                         counter += 1
         return counter
-    def isCenter(self):
+    def isCenter(self, detectionimage):
+        image= cv2.imread(detectionimage)
+        print(image.shape)
         return True
 
 # only to test the class
 yellow= ColorDetector()
 # value should be 0 because in the japanese flag is no yellow or green
 print(yellow.detectColor("japan.png"))        
+yellow.isCenter("japan.png")
