@@ -7,7 +7,7 @@ image = cv2.imread("japan.png")
 # Momentanes Problem: weiße werte sind bei allen drei 255
 # => nur wenn der größte wert rot ist wird counter hochgezählt
 # Entfernung: Check
-
+# Datei zum testen von opencv optionen
 counter=0
 print(image.shape)
 print(image[69,1,1])
