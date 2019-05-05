@@ -3,17 +3,19 @@ import numpy as np
 
 class ColorDetector:
     def detectColorFast(self, detectionimage):
-        image = self.prepareImage(detectionimage)
+        image = self.prepareImage(detectionimage)[:,:,2]
         counter=0
         for row in image:
             for column in row:
-                blue, green, red = column
-                if(red>blue):
-                    if(red>green):
-                        counter += 1
+                #blue, green, red = column
+                if(column>0):
+                    counter += 1
+                    #if(red>green):
+                        #counter += 1
         return counter
-    def detectColorPrecise(self, detectionimage):
+    def isCenter(self, detectionimage):
         img= self.prepareImage(detectionimage)
+        print(img.shape)
         counter = 0
         row_sum = 0
         column_sum = 0
@@ -27,24 +29,23 @@ class ColorDetector:
                     row_sum += i
                     column_sum += j
         print("Red pixel: " + str(counter))
-        center_y = np.rint(row_sum / counter)
-        center_x = np.rint(column_sum / counter)
-        print("Center: " + str(center_x) + " " + str(center_y))
-        return counter
-    def isCenter(self, detectionimage):
-        img= self.prepareImage(detectionimage)
-        row= int(img.shape[0]/2)
-        col= int(img.shape[1]/2)
-        center= img[row,col]
-        print(center)
-        blue, green, red = center
-        if(red>blue):
-            if(red>green):
+        center_row = np.rint(row_sum / counter)
+        center_column = np.rint(column_sum / counter)
+        picture_center_row= int(img.shape[0]/2)
+        picture_center_col= int(img.shape[1]/2)
+        print("Center: " + str(center_row) + " " + str(center_column))
+        guiltyDistance=20
+        difference= center_column - picture_center_col
+        if(difference >=0):
+            if(difference < guiltyDistance):
                 return True
             else:
                 return False
         else:
-            return False
+            if(difference > -guiltyDistance):
+                return True
+            else:
+                return False    
     def prepareImage(self, detectionimage):
         img = cv.imread(detectionimage)
         img = cv.resize(img, (0,0), fx=0.5, fy=0.5)
@@ -64,6 +65,5 @@ class ColorDetector:
 
 # only to test the class
 red= ColorDetector()
-print(red.detectColorFast("roterball3.png"))        
-print(red.detectColorPrecise("roterball3.png"))
-print(red.isCenter("japan.png"))
+print(red.detectColorFast("roterball2.png"))        
+print(red.isCenter("roterball2.png"))
