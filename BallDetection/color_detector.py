@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 
 class ColorDetector:
-    def detectColorFast(self, detectionimage):
+    def countRed(self, detectionimage):
         image = self.prepareImage(detectionimage)[:,:,2]
         counter=0
         for row in image:
@@ -61,7 +61,6 @@ class ColorDetector:
         mask = cv.dilate(mask, None, iterations=5)
         res = cv.bitwise_and(img, img, mask = mask) 
         return res
-
 
 # only to test the class
 red= ColorDetector()
