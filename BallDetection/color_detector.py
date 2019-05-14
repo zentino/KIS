@@ -33,6 +33,7 @@ class ColorDetector:
         center_column = np.rint(column_sum / counter)
         picture_center_row= int(img.shape[0]/2)
         picture_center_col= int(img.shape[1]/2)
+        print(picture_center_col)
         print("Center: " + str(center_row) + " " + str(center_column))
         guiltyDistance=20
         difference= center_column - picture_center_col
@@ -64,5 +65,5 @@ class ColorDetector:
 
 # only to test the class
 red= ColorDetector()
-print(red.detectColorFast("roterball2.png"))        
-print(red.isCenter("roterball2.png"))
+print(red.countRed("C:\\Users\\Foobai\\Desktop\\KIS\\Projekt\\KIS\BallDetection\\roterball.png"))
+print(red.isCenter("C:\\Users\\Foobai\\Desktop\\KIS\\Projekt\\KIS\BallDetection\\roterball.png"))
