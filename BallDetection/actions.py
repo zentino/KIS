@@ -24,6 +24,7 @@ class Actions:
 
     def rotateRight(self):
         x=0
+        i = 0
         while True:
             back_right_value  = (int)(((math.sin(x)*0.1+0.5)*self.servo_range) +self.servo_min)
             back_left_value  = (int)(((math.cos(x)*0.1+0.5)*self.servo_range)+self.servo_min)
@@ -36,12 +37,15 @@ class Actions:
             if(x > math.pi*2):
               x -= math.pi*2
 
+            i += 1
+
         self.reset()
 
 
     def rotateLeft(self):
         x=0
-        while True:
+        i = 0
+        while i < 100:
             back_right_value  = (int)(((math.cos(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             back_left_value  = (int) (((math.sin(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             self.pwm.set_pwm(self.back_right, 0, back_right_value)
@@ -52,13 +56,15 @@ class Actions:
 
             if(x > math.pi*2):
               x -= math.pi*2
+            i += 1
         self.reset()
 
 
 
     def walkStraight(self):
         x=0
-        while True:
+        i = 0
+        while i < 100:
             front_right_value = (int)(((math.sin(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             front_left_value = (int)(((math.sin(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             back_right_value  = (int)(((math.cos(x)*0.1+0.5)*self.servo_range)+self.servo_min)
@@ -73,6 +79,7 @@ class Actions:
 
             if(x > math.pi*2):
               x -= math.pi*2
+            i += 1
         self.reset()
 
     def reset(self):
@@ -82,5 +89,4 @@ class Actions:
         self.pwm.set_pwm(self.back_left, 0, self.servo_mid)
         self.pwm.set_pwm(self.back_right, 0, self.servo_mid)
 
-a = Actions()
-a.rotateRight()
+

@@ -9,17 +9,19 @@ class QLearningAgent:
     q  = []
     possibleActions = 0
 
-    def _init_(self, actions):
-        # calculate state
-        # initialize all dogRob actions e.g. walk left, walk right, walk straight etc
-        # initialize q table with random numbers (0-1)
-
-        # e.g.
+    def _init_(self, actions, states):
         possibleActions = actions
+        for i in range(states):
+            obj = [];
+            #Three actions: left, stay, right
+            for j in range(actions):
+                obj.append(float(randint(0,1)))
+                self.q.append(obj)
+
 
 
     def learn(self, state, nextState, action, reward):
-        self.q[state][action] += self.a * (reward + gamma * (self.q[s_next][actionWithBestRating(nextState)] - q[state][action]))
+        self.q[state][action] += self.a * (reward + self.gamma * (self.q[nextState][self.actionWithBestRating(nextState)] - self.q[state][action]))
 
 
     def chooseAction(self, state):

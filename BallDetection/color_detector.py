@@ -39,9 +39,9 @@ class ColorDetector:
         difference= center_column - picture_center_col
         if(difference >=0):
             if(difference < guiltyDistance):
-                return True
+                return [True, counter]
             else:
-                return False
+                return [False, counter]
         else:
             if(difference > -guiltyDistance):
                 return True
