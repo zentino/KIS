@@ -25,7 +25,8 @@ class Actions:
     def rotateRight(self):
         x=0
         i = 0
-        while True:
+        while i < 150:
+	    print("right")
             back_right_value  = (int)(((math.sin(x)*0.1+0.5)*self.servo_range) +self.servo_min)
             back_left_value  = (int)(((math.cos(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             self.pwm.set_pwm(self.back_right, 0, back_right_value)
@@ -45,7 +46,8 @@ class Actions:
     def rotateLeft(self):
         x=0
         i = 0
-        while i < 100:
+        while i < 150:
+	    print("left")
             back_right_value  = (int)(((math.cos(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             back_left_value  = (int) (((math.sin(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             self.pwm.set_pwm(self.back_right, 0, back_right_value)
@@ -64,7 +66,8 @@ class Actions:
     def walkStraight(self):
         x=0
         i = 0
-        while i < 100:
+        while i < 150:
+	    print("straight")
             front_right_value = (int)(((math.sin(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             front_left_value = (int)(((math.sin(x)*0.1+0.5)*self.servo_range)+self.servo_min)
             back_right_value  = (int)(((math.cos(x)*0.1+0.5)*self.servo_range)+self.servo_min)

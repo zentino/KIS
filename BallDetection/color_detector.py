@@ -14,7 +14,8 @@ class ColorDetector:
                         #counter += 1
         return counter
     def isCenter(self, detectionimage):
-        img= self.prepareImage(detectionimage)
+        #img= self.prepareImage(detectionimage)
+	img = detectionimage
         print(img.shape)
         counter = 0
         row_sum = 0
@@ -28,7 +29,10 @@ class ColorDetector:
                     counter += 1
                     row_sum += i
                     column_sum += j
+
         print("Red pixel: " + str(counter))
+	if counter ==  0:
+		return [False, counter]
         center_row = np.rint(row_sum / counter)
         center_column = np.rint(column_sum / counter)
         picture_center_row= int(img.shape[0]/2)
@@ -44,12 +48,13 @@ class ColorDetector:
                 return [False, counter]
         else:
             if(difference > -guiltyDistance):
-                return True
+                return [True, counter]
             else:
-                return False    
+                return [False, counter]    
     def prepareImage(self, detectionimage):
-        img = cv.imread(detectionimage)
-        img = cv.resize(img, (0,0), fx=0.5, fy=0.5)
+        img = detectionimage
+	print("prepare")
+        img = cv.resize(img, (0,0), fx=0.1, fy=0.1)
         hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
         lower1_red = np.array([0,70,50])
         upper1_red = np.array([10,255,255])
@@ -64,6 +69,7 @@ class ColorDetector:
         return res
 
 # only to test the class
-red= ColorDetector()
-print(red.countRed("C:\\Users\\Foobai\\Desktop\\KIS\\Projekt\\KIS\BallDetection\\roterball.png"))
-print(red.isCenter("C:\\Users\\Foobai\\Desktop\\KIS\\Projekt\\KIS\BallDetection\\roterball.png"))
+#red= ColorDetector()
+
+
+

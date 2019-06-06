@@ -9,15 +9,15 @@ class QLearningAgent:
     q  = []
     possibleActions = 0
 
-    def _init_(self, actions, states):
-        possibleActions = actions
+    def __init__(self, actions, states):
+        self.possibleActions = actions
         for i in range(states):
             obj = [];
-            #Three actions: left, stay, right
             for j in range(actions):
-                obj.append(float(randint(0,1)))
+               # obj.append(float(randint(0,1)))
+		obj.append(random())
                 self.q.append(obj)
-
+	print(self.q)
 
 
     def learn(self, state, nextState, action, reward):
@@ -30,11 +30,11 @@ class QLearningAgent:
         # epsilon-greedy
         if (e < self.epsilon):
             # choose random action
-            action = randint(self.possibleActions)
+            action = randint(0,self.possibleActions - 1)
         else:
             # choose action with highest q value
-            action = actionWithBestRating(state)
-        return a
+            action = self.actionWithBestRating(state)
+        return action
 
 
     def actionWithBestRating(self, state):
@@ -42,7 +42,7 @@ class QLearningAgent:
         index = 0
         for i in range(self.possibleActions):
             if self.q[state][i] > max:
-                max = q[state][i]
+                max = self.q[state][i]
                 index = i;
 
         return index

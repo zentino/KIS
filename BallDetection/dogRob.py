@@ -17,16 +17,17 @@ def start():
     states = 2
     actions = 3
     action = 0
+    state = 0
     nextState = 0
     ballvisible = True
-    q = QLearningAgent(actions, states)
+    q = QLearningAgent(3, 2)
     # allow the camera to warmup
     time.sleep(0.1)
     # grab an image from the camera
     camera.capture(rawCapture, format="bgr")
     image = rawCapture.array
     res = c.prepareImage(image)
-    redPixel = c.isCenter()[1]
+    redPixel = c.isCenter(res)[1]
 
     if redPixel > 0:
         state = 0
@@ -40,14 +41,14 @@ def start():
         elif action == 1:
             a.rotateLeft()
         else:
-            a.walkStraigt()
+            a.walkStraight()
 
         time.sleep(0.1)
-
+	rawCapture.truncate(0)
         camera.capture(rawCapture, format="bgr")
         image = rawCapture.array
         res = c.prepareImage(image)
-        isCenter, pixelCount = c.isCenter()
+        isCenter, pixelCount = c.isCenter(res)
 
         if pixelCount > 0:
             nextState = 0
